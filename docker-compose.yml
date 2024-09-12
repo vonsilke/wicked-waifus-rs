@@ -9,7 +9,7 @@ services:
     ports:
       - '10001:10001'
     volumes:
-      - "./assets/docker/configserver.toml:/app/configserver.toml"
+      - "./docker/configserver.toml:/app/configserver.toml"
       - "./assets/config:/app/assets/config"
   shorekeeper-hotpatch-server:
     image: shorekeeper-hotpatch-server:1.3.0-SNAPSHOT
@@ -19,7 +19,7 @@ services:
     ports:
       - '10002:10002'
     volumes:
-      - "./assets/docker/hotpatch.toml:/app/hotpatch.toml"
+      - "./docker/hotpatch.toml:/app/hotpatch.toml"
       - "./assets/hotpatch:/app/assets/hotpatch"
   shorekeeper-login-server:
     image: shorekeeper-login-server:1.3.0-SNAPSHOT
@@ -29,7 +29,7 @@ services:
     ports:
       - '5500:5500'
     volumes:
-      - "./assets/docker/loginserver.toml:/app/loginserver.toml"
+      - "./docker/loginserver.toml:/app/loginserver.toml"
   shorekeeper-gateway-server:
     image: shorekeeper-gateway-server:1.3.0-SNAPSHOT
     depends_on:
@@ -40,7 +40,7 @@ services:
       #      - '10003:10003'
       - '7777:7777/udp'
     volumes:
-      - "./assets/docker/gateway.toml:/app/gateway.toml"
+      - "./docker/gateway.toml:/app/gateway.toml"
   shorekeeper-game-server:
     image: shorekeeper-game-server:1.3.0-SNAPSHOT
     depends_on:
@@ -50,7 +50,7 @@ services:
 #    ports:
 #      - '10004:10004'
     volumes:
-      - "./assets/docker/gameserver.toml:/app/gameserver.toml"
+      - "./docker/gameserver.toml:/app/gameserver.toml"
       - "./assets/logic:/app/assets/logic"
   shorekeeper-postgres:
     image: postgres:16.4-alpine3.20
@@ -66,7 +66,7 @@ services:
     environment:
       - "POSTGRES_PASSWORD=toor"
     volumes:
-      - "./assets/docker/postgres/scripts:/docker-entrypoint-initdb.d"
+      - "./docker/postgres/scripts:/docker-entrypoint-initdb.d"
       - shorekeeper-postgres-vol:/var/lib/postgresql/data
 volumes:
   shorekeeper-postgres-vol:
