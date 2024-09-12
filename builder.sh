@@ -7,3 +7,6 @@ docker build -t shorekeeper-gateway-server:1.3.0-SNAPSHOT --build-arg MICROSERVI
 docker build -t shorekeeper-game-server:1.3.0-SNAPSHOT --build-arg MICROSERVICE=game-server -f Dockerfile-service .
 
 docker rmi shorekeeper-builder:1.3.0-SNAPSHOT
+
+# Persistence for the application
+docker volume create shorekeeper-postgres-vol

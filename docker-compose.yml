@@ -66,5 +66,8 @@ services:
     environment:
       - "POSTGRES_PASSWORD=toor"
     volumes:
-      # If you want to have persistence, mount postgres data folder
       - "./assets/docker/postgres/scripts:/docker-entrypoint-initdb.d"
+      - shorekeeper-postgres-vol:/var/lib/postgresql/data
+volumes:
+  shorekeeper-postgres-vol:
+    external: true

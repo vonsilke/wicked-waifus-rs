@@ -2,7 +2,7 @@
 http_addr = "0.0.0.0:5500"
 
 [gateway]
-host = "shorekeeper-gateway-server"
+host = "host.docker.internal"
 port = 7777
 
 [database]
