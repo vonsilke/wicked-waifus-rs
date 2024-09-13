@@ -60,6 +60,7 @@ handle_request! {
     UpdateSceneDate;
     EntityActive;
     EntityOnLanded;
+    CombatSendPack, combat_message;
 }
 
 handle_push! {
