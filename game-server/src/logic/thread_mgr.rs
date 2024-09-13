@@ -109,8 +109,7 @@ fn logic_thread_func(receiver: mpsc::Receiver<LogicInput>, load: Arc<AtomicUsize
             let mut world = world.borrow_mut();
             let mut players = world
                 .player_ids()
-                .map(|id| state.players.get(id).map(|pl| pl.borrow_mut()))
-                .flatten()
+                .flat_map(|id| state.players.get(id).map(|pl| pl.borrow_mut()))
                 .collect::<Box<_>>();
 
             super::systems::tick_systems(&mut world, &mut players);

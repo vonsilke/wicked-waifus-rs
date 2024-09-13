@@ -126,8 +126,7 @@ impl Player {
             .unwrap()
             .role_id_set
             .iter()
-            .map(|id| self.role_list.iter().find(|r| r.role_id == *id))
-            .flatten()
+            .flat_map(|id| self.role_list.iter().find(|r| r.role_id == *id))
             .collect()
     }
 
