@@ -20,7 +20,7 @@ macro_rules! handle_request {
                             tracing::debug!("logic: processing request {}", stringify!($($inner_package::)?[<$name Request>]));
 
                             let mut response = ::shorekeeper_protocol::$($inner_package::)?[<$name Response>]::default();
-                            [<on_ $name:snake _request>](player, request, &mut response);
+                            [<on_ $($inner_package:snake _)? $name:snake _request>](player, request, &mut response);
 
                             player.respond(response, msg.get_rpc_id());
                         },
