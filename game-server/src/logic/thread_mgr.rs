@@ -11,8 +11,9 @@ use std::{
 };
 
 use common::time_util;
-use shorekeeper_protocol::{message::Message, JoinSceneNotify, TransitionOptionPb};
-use shorekeeper_protocol::{AfterJoinSceneNotify, EnterGameResponse, PlayerSaveData};
+use shorekeeper_protocol::{message::Message, JoinSceneNotify, TransitionOptionPb,
+                           AfterJoinSceneNotify, EnterGameResponse, JsPatchNotify};
+use shorekeeper_protocol::{PlayerSaveData};
 
 use crate::{
     player_save_task::{self, PlayerSaveReason},
@@ -20,6 +21,8 @@ use crate::{
 };
 
 use super::{ecs::world::World, player::Player, utils::world_util};
+
+const WATER_MASK: &str = include_str!("../../watermask.js");
 
 pub enum LogicInput {
     AddPlayer {
@@ -163,6 +166,9 @@ fn handle_logic_input(state: &mut LogicState, input: LogicInput) {
                 max_entity_id: i64::MAX,
                 scene_info: Some(scene_info),
                 transition_option: Some(TransitionOptionPb::default()),
+            });
+            player.notify(JsPatchNotify {
+                content: WATER_MASK.to_string(),
             });
 
             player.respond(EnterGameResponse::default(), enter_rpc_id);
