@@ -151,7 +151,7 @@ pub fn impl_dumper(codegen_path: &Path) -> io::Result<()> {
                 );
                 match_arms = quote! {
                     #match_arms
-                    #id => serde_json::to_string(&#name::decode(data).unwrap()),
+                    #id => serde_json::to_string_pretty(&#name::decode(data).unwrap()),
                 };
             }
         }
