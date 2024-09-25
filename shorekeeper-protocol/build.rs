@@ -146,12 +146,11 @@ pub fn impl_dumper(codegen_path: &Path) -> io::Result<()> {
             );
         } else if line.contains("pub struct") {
             if let Some(id) = id.take() {
-                let name = format_ident!(
-                    "{}", line.trim_start().split(' ').nth(2).unwrap().to_string()
-                );
+                let name = line.trim_start().split(' ').nth(2).unwrap().to_string();
+                let name_ident = format_ident!("{}", name);
                 match_arms = quote! {
                     #match_arms
-                    #id => serde_json::to_string_pretty(&#name::decode(data).unwrap()),
+                    #id => Ok((#name, serde_json::to_string_pretty(&#name_ident::decode(data)?)?)),
                 };
             }
         }
@@ -166,11 +165,19 @@ pub fn impl_dumper(codegen_path: &Path) -> io::Result<()> {
             use crate::debug::*;
             use crate::summon::*;
 
-            pub fn get_debug_info(id: u16, data: &[u8]) -> String {
+            #[derive(thiserror::Error, Debug)]
+            pub enum Error {
+                #[error("serde_json::Error: {0}")]
+                Json(#[from] serde_json::Error),
+                #[error("serde_json::Error: {0}")]
+                Decode(#[from] prost::DecodeError),
+            }
+
+            pub fn get_debug_info(id: u16, data: &[u8]) -> Result<(&str, String), Error> {
                 match id {
                     #match_arms
-                    _ => Ok("".to_string()),
-                }.unwrap()
+                    _ => Ok(("UnknownType", "".to_string())),
+                }
             }
         }
     };
