@@ -12497,8 +12497,8 @@ message NormalItemUpdateNotify {
 }
 
 // MessageId: 22716 (Notify)
-message pns {
-  repeated int32 Pws = 146;
+message NormalItemRemoveNotify {
+  repeated int32 NormalItemIdList = 146;
 }
 
 // MessageId: 28027 (Notify)
@@ -12525,8 +12525,8 @@ message WeaponItemAddNotify {
 }
 
 // MessageId: 21270 (Notify)
-message Ins1 {
-  repeated int32 xws = 102;
+message WeaponItemRemoveNotify {
+  repeated int32 WeaponItemIncrIdList = 102;
 }
 
 // MessageId: 27123 (Request)
