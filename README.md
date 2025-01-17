@@ -1,6 +1,6 @@
 # Shorekeeper
 
-![Screenshot](https://git.xeondev.com/Shorekeeper/Shorekeeper/raw/branch/master/screenshot.png)
+![screenshot](https://github.com/user-attachments/assets/e5810c15-c35c-40c4-97b8-e2fc81583409)
 
 ## About
 **Shorekeeper is an open-source Wuthering Waves server emulator written in Rust**. The goal of this project is to ensure a clean, easy-to-understand code environment. Shorekeeper uses **tokio** for asynchronous networking operations, **axum** as http framework and **ZeroMQ** for communication between servers. It also implements **performant and extensible ECS** for emulation of the game world.
